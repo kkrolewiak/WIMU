@@ -39,13 +39,21 @@ Testy XAI:
 
 ## Harmonogram
 18.10.24 Początek realizacji projektu
+
 20.10.24 Oddanie dokumentacji wstępnej
+
 27.10.24 Wstępny skrypt do generowania próbek, konfiguracja środowiska eksperymentalnego
+
 03.11.24 Pierwsza działająca sieć do klasyfikacji próbek, zakończenie analizy literaturowej
+
 17.11.24 Pierwsze rezultaty Concept Relevance Propagation na bazowej sieci
+
 23.11.24 Ocena czy prosta sieć splotowa nadaje się do zagadnienia czy należy zmienić podejście
+
 01.12.24 Przygotowanie architektur sieci, które będą nadawać się do analizy.
+
 15.12.24 Wstępne wyniki Concept Relevance Propagation
+
 30.01.24 Szlifowanie, oddanie projektu
 
 ## Stack technologiczny
