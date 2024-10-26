@@ -1,0 +1,12 @@
+# Poetry files
+poetry.lock
+
+# PyTorch and model files
+*.pt
+*.pth
+checkpoints/
+
+# Virtual environments
+venv/
+.env/
+.pdm.toml
