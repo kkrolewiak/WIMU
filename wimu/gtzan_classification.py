@@ -77,7 +77,7 @@ model = CNNModel()
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-epochs = 20
+epochs = 40
 for epoch in range(epochs):
     model.train()
     running_loss = 0.0
@@ -100,7 +100,5 @@ with torch.no_grad():
         _, predicted = torch.max(outputs.data, 1)
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
-        print(predicted)
-        print(labels)
 
 print(f'Validation Accuracy: {correct / total:.2f}')
