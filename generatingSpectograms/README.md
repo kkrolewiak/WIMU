@@ -17,7 +17,7 @@ Make sure you have the following Python packages installed:
 - `librosa`
 - `matplotlib`
 - `numpy`
-- `fluidsynth`
+- `pyFluidSynth`
 - `soundfile`
 
 You also need a SoundFont file (`.sf2`) for audio synthesis. Here you can download sample file: https://member.keymusician.com/Member/FluidR3_GM/index.html
