@@ -20,7 +20,7 @@ Make sure you have the following Python packages installed:
 - `pyFluidSynth`
 - `soundfile`
 
-You also need a SoundFont file (`.sf2`) for audio synthesis. Here you can download sample file: https://member.keymusician.com/Member/FluidR3_GM/index.html
+You also need a SoundFont file (`.sf2`) for audio synthesis and you will need to install the fluidsynth application. Here you can download sample file: https://member.keymusician.com/Member/FluidR3_GM/index.html 
 
 ## Usage
 

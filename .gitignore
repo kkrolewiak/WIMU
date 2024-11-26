@@ -13,3 +13,9 @@ venv/
 
 # Data directory
 data/
+
+# probably licensed soundfont files
+*.sf2
+
+# our datset
+instrument_dataset/
