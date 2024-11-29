@@ -1,4 +1,4 @@
-# WIMU - Music Spectrogram Explained Using Concept Relevance Propagation
+# See the Sound of a Guitar: Concept Relevance Propagation in Music Spectrograms
 ## Autorzy
 Mateusz Szczęsny, Kacper Królewiak, Kacper Łobodecki
 ## Wstęp
@@ -67,5 +67,10 @@ Testy XAI:
 -   Biblioteka pyFluidSynth - pozwoli na odtwarzanie plików midi używając typowych brzmień general MIDI synth. (Można potem spróbować czymś lepszej jakości)
 
 ## Bibliografia
-1. From Attribution Maps to Human-Understandable Explanations through Concept Relevance Propagation - [https://arxiv.org/pdf/2206.03208](https://arxiv.org/pdf/2206.03208)
-2. Deep Convolutional Neural Networks for Predominant Instrument Recognition in Polyphonic Music - [https://sci-hub.se/10.1109/taslp.2016.2632307](https://sci-hub.se/10.1109/taslp.2016.2632307)
+|     Artykuł     |     Podsumowanie     |     Model     |     Dataset     |     Źródło     |
+|-----------------|----------------------|---------------|-----------------|----------------|
+| Music Genre Classification using Spectrograms | Klasyfikacja muzyki, w tym gatunku, może być wykonywana przy użyciu sieci konwolucyjnych | Pretrenowany model konwolucyjny dostosowany do zadania, autorska sieć konwolucyjna | GTZAN | https://ieeexplore.ieee.org/document/9362364 |
+| Classification of Musical Genres Using Audio Spectrograms | Ulepszona sieć do rozpoznawania gatunku na podstawie spektrogramu. Odtworzyliśmy tę sieć do naszych badań. | Autorska 4-warstwowa sieć konwolucyjna | Autorski zbiór danych MK2 | https://ieeexplore.ieee.org/document/10541572 |
+| From attribution maps to human-understandable explanations through Concept Relevance Propagation | Concept Relevance Propagation wykorzystuje metody XAI do przystępnego wytłumaczenia predykcji sieci neuronowych. Metoda jest łatwo aplikowalna do różnych architektur sieci. | n.d. | n.d. | https://www.nature.com/articles/s42256-023-00711-8.pdf |
+| Deep Convolutional Neural Networks for Predominant Instrument Recognition in Polyphonic Music | Sieci konwolucyjne osiągają state-of-the-art wyniki w zadaniach rozpoznawania instrumentów na podstawie spektrogramów | Autorska, 8-warstwowa sieć konwolucyjna inspirowana strukturą AlexNet i VGGNet | Autorski zbiór 10.000 audio z 11 instrumentami | https://ieeexplore.ieee.org/document/7755799 |
+
