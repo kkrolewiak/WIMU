@@ -37,22 +37,22 @@ Testy XAI:
 -   Identyfikacja instrumentów użytych do wygenerowania melodii widocznej na spektrogramie.
 -   Wizualizacja, które fragmenty spektrogramu są kluczowe dla klasyfikacji za pomocą Concept Relevance Propagation.
 
-## Harmonogram
-18.10.24 Początek realizacji projektu
+## Harmonogram i hashe commitów z realizacją
+18.10.24 Początek realizacji projektu - 52b9cc173f34113816d5a5208c7e73f5a171d51c
 
-20.10.24 Oddanie dokumentacji wstępnej
+20.10.24 Oddanie dokumentacji wstępnej - a8376c01513c108d25a411e89df6709080836633
 
-27.10.24 Wstępny skrypt do generowania próbek, konfiguracja środowiska eksperymentalnego
+27.10.24 Wstępny skrypt do generowania próbek, konfiguracja środowiska eksperymentalnego - 2acee665fdf4d78c59fc44e5814881a086c3093a, 10e776d7dd857867e5e15e0c8f60fc58eb7e6109
 
-03.11.24 Pierwsza działająca sieć do klasyfikacji próbek, zakończenie analizy literaturowej
+03.11.24 Pierwsza działająca sieć do klasyfikacji próbek, zakończenie analizy literaturowej - 8e4b01852fa0a80a16ddc3243c79181af353e85d, c43d26bd23ee8a87cf3bb0f401ce75ef20828ed9
 
-17.11.24 Pierwsze rezultaty Concept Relevance Propagation na bazowej sieci
+17.11.24 Pierwsze rezultaty Concept Relevance Propagation na bazowej sieci - f8d52140bc810eab2ee5e10f04669b2ab4017879
 
-23.11.24 Ocena czy prosta sieć splotowa nadaje się do zagadnienia czy należy zmienić podejście
+23.11.24 Ocena czy prosta sieć splotowa nadaje się do zagadnienia czy należy zmienić podejście - 5ad32607d5d63a7cb9e7f6786374ea7e522dec74
 
-01.12.24 Przygotowanie architektur sieci, które będą nadawać się do analizy.
+01.12.24 Przygotowanie architektur sieci, które będą nadawać się do analizy. - 5ad32607d5d63a7cb9e7f6786374ea7e522dec74
 
-15.12.24 Wstępne wyniki Concept Relevance Propagation
+15.12.24 Wstępne wyniki Concept Relevance Propagation - 56ec3062ea3840fa1eefced5b78ecf7b2561b062
 
 30.01.24 Szlifowanie, oddanie projektu
 
