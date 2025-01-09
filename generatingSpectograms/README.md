@@ -20,7 +20,7 @@ Make sure you have the following Python packages installed:
 - `pyFluidSynth`
 - `soundfile`
 
-You also need a SoundFont file (`.sf2`) for audio synthesis and you will need to install the fluidsynth application. Here you can download sample file: https://member.keymusician.com/Member/FluidR3_GM/index.html 
+You also need a SoundFont file (`.sf2`) for audio synthesis and you will need to install the fluidsynth application. Here you can download sample file: https://member.keymusician.com/Member/FluidR3_GM/index.html
 
 ## Usage
 
@@ -37,7 +37,7 @@ python script.py <num_spectrograms> [options]
 | `<num_spectrograms>` | The number of spectrograms to generate.                       | Required         |
 | `--soundfont`        | Path to the SoundFont file (`.sf2`) used for WAV generation.  | `FluidR3_GM.sf2` |
 | `--output_folder`    | Folder to save generated files (MIDI, WAV, and spectrograms). | `output`         |
-| `--instrument`       | MIDI instrument number (0-127).                               | `0` (Piano)      |
+| `--instruments`      | MIDI instruments number (0-127).                              | `0` (Piano)      |
 | `--save_midi`        | Save generated MIDI files.                                    | Disabled         |
 | `--save_wav`         | Save generated WAV files.                                     | Disabled         |
 | `--resolution`       | Resolution settings: n_mels,fig_width,fig_height.             | `512,10,10`      |
@@ -47,7 +47,7 @@ python script.py <num_spectrograms> [options]
 **Generate 10 spectrograms with soundfont path `path/to/FluidR3_GM.sf2`, saving WAV files, played on the clarinet:**
 
 ```bash
-python script.py 10 --soundfont path/to/FluidR3_GM.sf2 --save_wav --instrument 71
+python script.py 10 --soundfont path/to/FluidR3_GM.sf2 --save_wav --instruments 0 40 71
 ```
 
 ## Output Structure

@@ -10,21 +10,30 @@ import soundfile as sf
 import argparse
 import time
 
-
-# 1. Generate MIDI
-def generate_random_midi(filename, instrument):
+def generate_random_midi_multi(filename, instruments):
     mid = mido.MidiFile()
-    track = mido.MidiTrack()
-    mid.tracks.append(track)
 
-    track.append(mido.Message('program_change', program=instrument))  # Set instrument
-    track.append(mido.MetaMessage('set_tempo', tempo=mido.bpm2tempo(120)))
+    tempo_bpm = 120
+    tempo = mido.bpm2tempo(tempo_bpm)
 
-    for i in range(5):
-        note = random.randint(60, 72)  # Random pitch in one octave
-        velocity = random.randint(50, 100)  # Random velocity
-        track.append(mido.Message('note_on', note=note, velocity=velocity, time=0))
-        track.append(mido.Message('note_off', note=note, velocity=velocity, time=mido.second2tick(1, mid.ticks_per_beat, mido.bpm2tempo(120))))
+    for i, inst in enumerate(instruments):
+        channel = i % 16
+        track = mido.MidiTrack()
+        mid.tracks.append(track)
+
+        track.append(mido.Message('program_change', program=inst, channel=channel))
+        track.append(mido.MetaMessage('set_tempo', tempo=tempo))
+
+        for _ in range(5):
+            note = random.randint(60, 72)
+            velocity = random.randint(50, 100)
+
+            note_on_time  = mido.second2tick(random.uniform(0.0, 1.0), mid.ticks_per_beat, tempo)
+            note_off_time = mido.second2tick(random.uniform(0.3, 2.0), mid.ticks_per_beat, tempo)
+
+            track.append(mido.Message('note_on',  note=note, velocity=velocity, time=int(note_on_time),  channel=channel))
+            track.append(mido.Message('note_off', note=note, velocity=velocity, time=int(note_off_time), channel=channel))
+
 
     mid.save(filename)
     print(f'MIDI file has been saved: {filename}')
@@ -46,18 +55,15 @@ def convert_midi_to_wav(midi_file, soundfont_file, output_wav):
             time.sleep(time_to_wait)
 
             if msg.type == 'note_on':
-                fs.noteon(0, msg.note, msg.velocity)
+                fs.noteon(msg.channel, msg.note, msg.velocity)
             elif msg.type == 'note_off':
-                fs.noteoff(0, msg.note)
-            elif msg.type == 'control_change':
-                fs.cc(0, msg.control, msg.value)
+                fs.noteoff(msg.channel, msg.note)
             elif msg.type == 'program_change':
-                fs.program_change(0, msg.program)
+                fs.program_change(msg.channel, msg.program)
 
             audio_data.extend(fs.get_samples(10000))
 
     audio_data = np.array(audio_data)
-
     sf.write(output_wav, audio_data, samplerate=44100, subtype='PCM_16')
 
     fs.delete()
@@ -85,16 +91,18 @@ def main():
     parser.add_argument("num_spectrograms", type=int, help="Number of spectrograms to generate")
     parser.add_argument("--soundfont", type=str, default="FluidR3_GM.sf2", help="Path to the SoundFont file")
     parser.add_argument("--output_folder", type=str, default="output", help="Folder to save the generated files")
-    parser.add_argument("--instrument", type=int, default=0, help="MIDI instrument number (0-127)")
+    parser.add_argument("--instruments", type=int, nargs='+', default=[0],
+                        help="List of MIDI instruments (0-127). E.g. --instruments 0 24 40")
     parser.add_argument("--save_midi", action="store_true", help="Save generated MIDI files")
     parser.add_argument("--save_wav", action="store_true", help="Save generated WAV files")
-    parser.add_argument("--resolution", type=str, default="512,10,10", help="Resolution settings: n_mels,fig_width,fig_height")
+    parser.add_argument("--resolution", type=str, default="512,10,10",
+                        help="Resolution settings: n_mels,fig_width,fig_height")
 
     args = parser.parse_args()
     num_spectrograms = args.num_spectrograms
     soundfont_file = args.soundfont
     output_folder = args.output_folder
-    instrument = args.instrument
+    instruments = args.instruments
     save_midi = args.save_midi
     save_wav = args.save_wav
     resolution = list(map(float, args.resolution.split(',')))
@@ -122,10 +130,10 @@ def main():
         spectrogram_file = os.path.join(spectrogram_folder, f'spectrogram_{i + 1}.png')
 
         if save_midi:
-            generate_random_midi(midi_file, instrument)
+            generate_random_midi_multi(midi_file, instruments)
         else:
             midi_file = "temp.mid"
-            generate_random_midi(midi_file, instrument)
+            generate_random_midi_multi(midi_file, instruments)
 
         if save_wav:
             convert_midi_to_wav(midi_file, soundfont_file, wav_file)
