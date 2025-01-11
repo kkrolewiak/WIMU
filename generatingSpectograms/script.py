@@ -70,25 +70,28 @@ def convert_midi_to_wav(midi_file, soundfont_file, output_wav):
 
 
 # 3. Generate spectrogram and save to file
-def generate_spectrogram(wav_file, output_file, n_mels, fig_size):
+def generate_spectrogram(wav_file, output_file, n_mels, fig_size, showAxis=False):
     print(f'Generating spectrogram for {wav_file}...')
     y, sr = librosa.load(wav_file)
     S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=n_mels)
     S_dB = librosa.power_to_db(S, ref=np.max)
-
     plt.figure(figsize=fig_size)
-    librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='mel')
-    plt.colorbar(format='%+2.0f dB')
-    plt.title('Spectrogram')
-    plt.tight_layout()
-    plt.savefig(output_file)
+    if showAxis:
+        librosa.display.specshow(S_dB, sr=sr, x_axis='time', y_axis='mel')
+        plt.colorbar(format='%+2.0f dB')
+        plt.title('Spectrogram')
+        plt.tight_layout()
+    else:
+        librosa.display.specshow(S_dB, sr=sr, x_axis='off', y_axis='off')
+        plt.axis('off')
+    plt.savefig(output_file, bbox_inches="tight", dpi=200)
     plt.close()
     print(f'Spectrogram saved to {output_file}')
 
 
 def main():
     parser = argparse.ArgumentParser(description="Generate and save spectrograms.")
-    parser.add_argument("num_spectrograms", type=int, help="Number of spectrograms to generate")
+    parser.add_argument("--fname", type=str, help="Spectrogram file name")
     parser.add_argument("--soundfont", type=str, default="FluidR3_GM.sf2", help="Path to the SoundFont file")
     parser.add_argument("--output_folder", type=str, default="output", help="Folder to save the generated files")
     parser.add_argument("--instruments", type=int, nargs='+', default=[0],
@@ -99,7 +102,7 @@ def main():
                         help="Resolution settings: n_mels,fig_width,fig_height")
 
     args = parser.parse_args()
-    num_spectrograms = args.num_spectrograms
+    fname = args.fname
     soundfont_file = args.soundfont
     output_folder = args.output_folder
     instruments = args.instruments
@@ -124,32 +127,31 @@ def main():
         os.makedirs(wav_folder, exist_ok=True)
     os.makedirs(spectrogram_folder, exist_ok=True)
 
-    for i in range(num_spectrograms):
-        midi_file = os.path.join(midi_folder, f'random_midi_{i + 1}.mid') if save_midi else None
-        wav_file = os.path.join(wav_folder, f'output_{i + 1}.wav') if save_wav else "temp.wav"
-        spectrogram_file = os.path.join(spectrogram_folder, f'spectrogram_{i + 1}.png')
+    midi_file = os.path.join(midi_folder, fname + f'.mid') if save_midi else None
+    wav_file = os.path.join(wav_folder, fname + f'.wav') if save_wav else "temp.wav"
+    spectrogram_file = os.path.join(spectrogram_folder, fname + f'.png')
 
-        if save_midi:
-            generate_random_midi_multi(midi_file, instruments)
-        else:
-            midi_file = "temp.mid"
-            generate_random_midi_multi(midi_file, instruments)
+    if save_midi:
+        generate_random_midi_multi(midi_file, instruments)
+    else:
+        midi_file = "temp.mid"
+        generate_random_midi_multi(midi_file, instruments)
 
-        if save_wav:
-            convert_midi_to_wav(midi_file, soundfont_file, wav_file)
-        else:
-            wav_file = "temp.wav"
-            convert_midi_to_wav(midi_file, soundfont_file, wav_file)
+    if save_wav:
+        convert_midi_to_wav(midi_file, soundfont_file, wav_file)
+    else:
+        wav_file = "temp.wav"
+        convert_midi_to_wav(midi_file, soundfont_file, wav_file)
 
-        if os.path.exists(wav_file):
-            generate_spectrogram(wav_file, spectrogram_file, n_mels, fig_size)
-        else:
-            print(f'WAV file {wav_file} not found.')
+    if os.path.exists(wav_file):
+        generate_spectrogram(wav_file, spectrogram_file, n_mels, fig_size)
+    else:
+        print(f'WAV file {wav_file} not found.')
 
-        if not save_midi and os.path.exists(midi_file):
-            os.remove(midi_file)
-        if not save_wav and os.path.exists(wav_file):
-            os.remove(wav_file)
+    if not save_midi and os.path.exists(midi_file):
+        os.remove(midi_file)
+    if not save_wav and os.path.exists(wav_file):
+        os.remove(wav_file)
 
 
 if __name__ == "__main__":
