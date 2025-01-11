@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
+import torch.nn.functional as f
 
 
 class CNNModel(nn.Module):
@@ -27,22 +27,22 @@ class CNNModel(nn.Module):
     def forward(self, x):
         x = self.conv1(x)
         x = self.bn1(x)
-        x = F.relu(x)
+        x = f.relu(x)
         x = self.maxpool(x)
 
         x = self.conv2(x)
         x = self.bn2(x)
-        x = F.relu(x)
+        x = f.relu(x)
         x = self.maxpool(x)
 
         x = self.conv3(x)
         x = self.bn3(x)
-        x = F.relu(x)
+        x = f.relu(x)
         x = self.maxpool(x)
 
         x = self.conv4(x)
         x = self.bn4(x)
-        x = F.relu(x)
+        x = f.relu(x)
         x = self.maxpool(x)
 
         x = torch.flatten(x, 1)
