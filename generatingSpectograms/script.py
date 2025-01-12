@@ -91,7 +91,7 @@ def generate_spectrogram(wav_file, output_file, n_mels, fig_size, showAxis=False
 
 def main():
     parser = argparse.ArgumentParser(description="Generate and save spectrograms.")
-    parser.add_argument("--fname", type=str, help="Spectrogram file name")
+    parser.add_argument("--fname", type=str, default="spectrogram1", help="Spectrogram file name")
     parser.add_argument("--soundfont", type=str, default="FluidR3_GM.sf2", help="Path to the SoundFont file")
     parser.add_argument("--output_folder", type=str, default="output", help="Folder to save the generated files")
     parser.add_argument("--instruments", type=int, nargs='+', default=[0],

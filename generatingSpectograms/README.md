@@ -34,7 +34,7 @@ python script.py <num_spectrograms> [options]
 
 | Parameter            | Description                                                   | Default          |
 | -------------------- | ------------------------------------------------------------- | ---------------- |
-| `<num_spectrograms>` | The number of spectrograms to generate.                       | Required         |
+| `--fname`            | File name of the generated spectrogram                        | `spectrogram1`   |
 | `--soundfont`        | Path to the SoundFont file (`.sf2`) used for WAV generation.  | `FluidR3_GM.sf2` |
 | `--output_folder`    | Folder to save generated files (MIDI, WAV, and spectrograms). | `output`         |
 | `--instruments`      | MIDI instruments number (0-127).                              | `0` (Piano)      |
@@ -44,10 +44,10 @@ python script.py <num_spectrograms> [options]
 
 ### Example
 
-**Generate 10 spectrograms with soundfont path `path/to/FluidR3_GM.sf2`, saving WAV files, played on the clarinet:**
+**Generate a spectrogram with soundfont path `path/to/FluidR3_GM.sf2`, saving WAV files, played on the clarinet:**
 
 ```bash
-python script.py 10 --soundfont path/to/FluidR3_GM.sf2 --save_wav --instruments 0 40 71
+python script.py --fname spectrogram1 --soundfont path/to/FluidR3_GM.sf2 --save_wav --instruments 0 40 71
 ```
 
 ## Output Structure
