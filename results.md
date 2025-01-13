@@ -28,6 +28,8 @@ Przykładowy spektrogram - fortepian, skrzypce, trabka i new age pad
 
 ## Architektura modelu
 
+Stworzony przez nas model konwolucyjna sieć neuronowa składająca się z czterech warstw konwolucyjnych, każda z normalizacją batchową i aktywacją ReLU, wspieranych poolingiem maksymalnym do redukcji wymiarów. Dla każdej kolejnej warstwy konwolucyjnej liczba map cech rośnie progresywnie od 8 do 128. Po przejściu przez warstwy konwolucyjne dane są spłaszczane, przechodzą przez warstwę dropout i trafiają do warstwy w pełni połączonej, która generuje wyjście o rozmiarze odpowiadającym liczbie klas. Podczas generowania predykcji modelu na wyjściu jest sigmoid, określający prawdopodobieństwo czy dany instrument jest w próbce.
+
 | Layer (type)      | Output Shape          | Param #   |
 |-------------------|-----------------------|-----------|
 | Conv2d-1          | [-1, 8, 398, 398]    | 224       |
