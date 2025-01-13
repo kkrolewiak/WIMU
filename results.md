@@ -5,8 +5,22 @@ Za pomocą bibliteki mido tworzone są pliki MIDI składające się z losowych d
 Pliki MIDI są syntezowane do WAV przy użyciu biblioteki fluidsynth z samplowaniem 44.1 kHz.
 Z plików WAV tworzone są spektrogramy przy użyciu biblioteki librosa z wartościami `window size`: 2048, `hop length`: 512, rodzaj funkcji kształtującej okno: `Hann window`.
 
-W przeprowadzonych przez nas eksperymentach wygenerowaliśmy dźwięki 12 różnych instrumentów. W każdej próbce znajdują się dźwięki od 1 do 4 instrumentów.
-Każdy instrument wstępuje w około 20% próbek. Do eksperymentów zostało wygenerowanych 8000 próbek.
+W przeprowadzonych przez nas eksperymentach wygenerowaliśmy dźwięki 12 różnych instrumentów: 
+- Acoustic Grand Piano
+- Nylon Acoustic Guitar
+- String Ensemble 1
+- Piccolo
+- Celesta
+- Acoustic Bass
+- Trumpet
+- Square Wave Lead
+- Hammond Organ
+- Violin
+- Soprano Sax
+- New Age Pad
+
+
+W każdej próbce znajdują się dźwięki od 1 do 4 instrumentów. Każdy instrument wstępuje w około 20% próbek. Do eksperymentów zostało wygenerowanych 8000 próbek.
 
 Przykładowy wygenerowany plik wav - fortepian
 
@@ -59,7 +73,7 @@ Wielkość batcha została eksperymentalnie ustawiona na 64, model osiągał prz
 
 
 ## Wyniki modelu
-Jako metrykę skuteczności modelu przyjęliśmy makrouśrednianą miarę F1 Score, ze względu na istotną dysproporcję między liczbą próbek, gdzie dany instrument nie występuje niż występuje. Wytrenowany przez nas model osiągnął wynik 0.92. Poniżej przedstawione zostały wyniki przed uśrednieniem, dla każdego instrumenu.
+Ze względu na istotną dysproporcję między liczbą próbek, gdzie dany instrument nie występuje a liczbą próbek, gdzie występuje, jako metrykę skuteczności modelu przyjęliśmy makrouśrednianą miarę F1 Score. Wytrenowany przez nas model osiągnął wynik 0.92. Poniżej przedstawione zostały wyniki przed uśrednieniem, dla każdego instrumenu.
 
 | Instrument              | F1 Score |
 |-------------------------|----------|
