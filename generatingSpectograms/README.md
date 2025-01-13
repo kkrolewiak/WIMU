@@ -20,6 +20,8 @@ Make sure you have the following Python packages installed:
 - `pyFluidSynth`
 - `soundfile`
 
+Make sure you also install the FluidSynth application (`sudo apt install fluidsynth` on Ubuntu). Otherwise pyFluidSynth will not work. 
+
 You also need a SoundFont file (`.sf2`) for audio synthesis and you will need to install the fluidsynth application. Here you can download sample file: https://member.keymusician.com/Member/FluidR3_GM/index.html
 
 ## Usage
@@ -27,7 +29,7 @@ You also need a SoundFont file (`.sf2`) for audio synthesis and you will need to
 Run the script using the command below:
 
 ```bash
-python script.py <num_spectrograms> [options]
+python script.py [options]
 ```
 
 ### Parameters
@@ -47,7 +49,7 @@ python script.py <num_spectrograms> [options]
 **Generate a spectrogram with soundfont path `path/to/FluidR3_GM.sf2`, saving WAV files, played on the clarinet:**
 
 ```bash
-python script.py --fname spectrogram1 --soundfont path/to/FluidR3_GM.sf2 --save_wav --instruments 0 40 71
+python generate_spectrogram.py --fname spectrogram1 --soundfont path/to/FluidR3_GM.sf2 --save_wav --instruments 0 40 71
 ```
 
 ## Output Structure
