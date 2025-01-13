@@ -8,12 +8,12 @@ Z plików WAV tworzone są spektrogramy przy użyciu biblioteki librosa.
 W przeprowadzonych przez nas eksperymentach wygenerowaliśmy dźwięki 12 różnych instrumentów. W każdej próbce znajdują się dźwięki od 1 do 4 instrumentów.
 Każdy instrument wstępuje w około 20% próbek.
 
-Przykładowy wygenerowany plik wav - akustyczna gitara basowa
+Przykładowy wygenerowany plik wav - fortepian
 
 
-https://github.com/user-attachments/assets/0a07fd1a-fd52-47f1-bb53-71b741f06896
+https://github.com/user-attachments/assets/b03dd50b-78a2-4a85-91bf-e1c7651b83ae
 
-Przykładowy wygenerowana plik wav - pianino, skrzypce, trabka i new age pad
+Przykładowy wygenerowana plik wav - fortepian, skrzypce, trabka i new age pad
 
 
 https://github.com/user-attachments/assets/af86d618-3c87-4bd6-8d51-aa367ce6f821
