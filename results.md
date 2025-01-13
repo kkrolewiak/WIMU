@@ -19,8 +19,29 @@ W przeprowadzonych przez nas eksperymentach wygenerowaliśmy dźwięki 12 różn
 - Soprano Sax
 - New Age Pad
 
+W każdej próbce znajdują się dźwięki od 1 do 4 instrumentów. Każdy instrument wstępuje w około 20% próbek. Do eksperymentów zostało wygenerowanych 8000 próbek. Dokładne statystki każdego instrumentu podane są poniżej:
 
-W każdej próbce znajdują się dźwięki od 1 do 4 instrumentów. Każdy instrument wstępuje w około 20% próbek. Do eksperymentów zostało wygenerowanych 8000 próbek.
+Instrument name          Occurences in dataset
+Acoustic Grand Piano     1671
+Nylon Acoustic Guitar    1646
+String Ensemble 1        1643
+Piccolo                  1679
+Celesta                  1652
+Acoustic Bass            1684
+Trumpet                  1614
+Square Wave Lead         1716
+Hammond Organ            1638
+Violin                   1698
+Soprano Sax              1711
+New Age Pad              1702
+
+Liczba instrumentów w przykładzie    Ilość wystąpień
+1                                    2031
+2                                    1931
+3                                    1991
+4                                    2047
+
+Zbiór został podzielony na część treningową i walidacyjną w proorcji 80-20. 
 
 Przykładowy wygenerowany plik wav - fortepian
 
@@ -42,8 +63,7 @@ Przykładowy spektrogram - fortepian, skrzypce, trabka i new age pad
 
 ## Architektura modelu
 
-Stworzony przez nas model konwolucyjna sieć neuronowa składająca się z czterech warstw konwolucyjnych, każda z normalizacją batchową i aktywacją ReLU, wspieranych poolingiem maksymalnym do redukcji wymiarów. Dla każdej kolejnej warstwy konwolucyjnej liczba map cech rośnie progresywnie od 8 do 128. Po przejściu przez warstwy konwolucyjne dane są spłaszczane, przechodzą przez warstwę dropout i trafiają do warstwy w pełni połączonej, która generuje wyjście o rozmiarze odpowiadającym liczbie klas. Podczas generowania predykcji modelu na wyjściu jest sigmoid, określający prawdopodobieństwo czy dany instrument jest w próbce.
-
+Stworzony przez nas model konwolucyjna sieć neuronowa składająca się z czterech warstw konwolucyjnych, każda z normalizacją batchową i aktywacją ReLU, wspieranych poolingiem maksymalnym do redukcji wymiarów. Na wejście sieci podawane są czarno-białe spectrogramy o rozdzielczości 400x400 pikseli. Dla każdej kolejnej warstwy konwolucyjnej liczba map cech rośnie progresywnie od 8 do 128. Po przejściu przez warstwy konwolucyjne dane są spłaszczane, przechodzą przez warstwę dropout i trafiają do warstwy w pełni połączonej, która generuje wyjście o rozmiarze odpowiadającym liczbie klas, czyli ilości różnych intrumentów w zbiorze trenującym.
 | Layer (type)      | Output Shape          | Param #   |
 |-------------------|-----------------------|-----------|
 | Conv2d-1          | [-1, 8, 398, 398]    | 224       |
@@ -89,3 +109,34 @@ Ze względu na istotną dysproporcję między liczbą próbek, gdzie dany instru
 | Violin                  | 0.97     |
 | Soprano Sax             | 0.96     |
 | New Age Pad             | 1.00     |
+
+
+## Analiza Concept Relevence Propragation
+
+Model został przeanalizowany techniką Concept Relevence Propagation (CRP). Kod źródłowy oryginalnej implmentacji dostępny: https://github.com/rachtibat/zennit-crp/tree/master
+
+Biblioteka ta pozwala na wizualiacje wpływu części spectrogramu na decyzję sieci. Kolor Niebieski pokazuje czynniki wpływające negatywnie (widzę to więc wiem że to nie ten instrument), czerwone zaś pozytywnie (widzę to więc wiem że to ten instrument). Przygotowany został bardzo mały zbiór danych zawierający ciekawe kombinacje intrumentów do analizy oraz skrypt pozwalający oglądać spectrogramy pod kątem klasyfikacji jako konkretny instrument, oraz całościowo jako jeden z wielu (concept_propagation_tests.ipynb)
+
+Poniżej pokazana analiza przykładu który zawiera wyłącznie instrument "Acustic Bass":
+Spectrogram:
+![spectrogram2](https://github.com/user-attachments/assets/c6e7df4e-acae-42e2-8756-918c156900d5)
+Atrybucja CRP:
+![Bass_crp](https://github.com/user-attachments/assets/608d3fa6-e2a6-4852-b0cc-fd6141eb61aa)
+
+Widać że model zwraca uwagę na atak pierwszej nuty zagranej przez instrument, i ogólnie skupia się na najiższych i najwyższych harmonicznych. Zdaje się to być bardzo sensowane, ludzie też zazwyczają rozpoznają brzmie intrumentu po ataku oraz rozkładzie harmoniczncyh. 
+
+Rzućmy okiem na przykład zawierający instrumenty "Square Lead" i "New Age Pad":
+Spectrogram:
+![leadPad](https://github.com/user-attachments/assets/157a1e0f-403b-4c26-b582-3d63f5ae636c)
+Atrybucja CRP:
+![cpr_square_pad](https://github.com/user-attachments/assets/6934d440-07ae-466b-9bd5-17884e32a6ef)
+
+Model dokonuje tutaj prawidłowej klasyfikacji zwracając uwagę na zupełnie inny rejestr harmonicznych. Oba te intrumenty mają dużą składową wysokich harmonicznych w porównaniu do instrumentów akustycznych. Square lead sechuje się bardzo krótkim atakiem i releasem co skutkije bardzo ostrym spectrogramem, pad caś ma długi atak i bardzo długi release, oraz duży pokłos i więcej różnych składowych harmonicznych, nie tylko nieparzystych wielokrotności co skutkuje rozmazanym spectrogramem. Jest to poniekąd widoczne na analizie w postaci dłuższych czerwonych smug na atrybucji dla pada. 
+
+Ostatnia analiza której się przyjżymy to przykład dla 4 instrumentów na raz: "Acoustic Grand Piano", "Trumpet", "Violin" oraz "New Age Pad"
+Spectrogram:
+![pianoviolinnewagepadtrumpet](https://github.com/user-attachments/assets/6fb06089-b3c2-442d-9bb4-6a4bdbd33d95)
+Atrybucja CRP:
+![4instr_crp](https://github.com/user-attachments/assets/0b3d0681-35c5-4bcb-87e8-5ff7959ec2ee)
+
+Na tym przykładzie truno już jest się połapać patrząc na spectrogram. Co więcej pianino jest praktycznie niesłyszalne w pliku audio. Niemniej nie przeszkadza to modelowi w prawidłowej klasyfikacji. Miałem nadzieję że model zwróci uwagę na to że dźwięk pochodzący od "violin" na spectrogramie ma bardzo pofalowane spektrum od efektu wibrato, "trumpet" zaś zaczyna każdą nutę od nieco niższej częstotliwości a później narasta. Z atrybucji ciężko jest jednoznacznie powiedzieć że model zwraca na to uwagę. Raczej po prostu bardzo dobrze nauczył się rozkładu harmonicznych dla każdego instrumentu obrazują mocno zarysowane linie w bardzo konkretnych odstępach i w konkretych pasmach. Jest to też na pewno jeden z poprawnych sposobów na rozpoznanie brzmienia intrumentu jako że to właśnie rozkład harmonicznych decyduje o brzmieniu. 
