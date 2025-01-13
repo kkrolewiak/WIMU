@@ -28,6 +28,26 @@ Przykładowy spektrogram - fortepian, skrzypce, trabka i new age pad
 
 ## Architektura modelu
 
+| Layer (type)      | Output Shape          | Param #   |
+|-------------------|-----------------------|-----------|
+| Conv2d-1          | [-1, 8, 398, 398]    | 224       |
+| BatchNorm2d-2     | [-1, 8, 398, 398]    | 16        |
+| MaxPool2d-3       | [-1, 8, 199, 199]    | 0         |
+| Conv2d-4          | [-1, 16, 197, 197]   | 1,168     |
+| BatchNorm2d-5     | [-1, 16, 197, 197]   | 32        |
+| MaxPool2d-6       | [-1, 16, 98, 98]     | 0         |
+| Conv2d-7          | [-1, 32, 96, 96]     | 4,640     |
+| BatchNorm2d-8     | [-1, 32, 96, 96]     | 64        |
+| MaxPool2d-9       | [-1, 32, 48, 48]     | 0         |
+| Conv2d-10         | [-1, 128, 46, 46]    | 36,992    |
+| BatchNorm2d-11    | [-1, 128, 46, 46]    | 256       |
+| MaxPool2d-12      | [-1, 128, 23, 23]    | 0         |
+| Dropout-13        | [-1, 67712]          | 0         |
+| Linear-14         | [-1, 12]             | 812,556   |
+| **Total params** |                       | 855,948   |
+| **Trainable params** |                    | 855,948   |
+| **Non-trainable params** |               | 0         |
+
 ## Trening modelu
 
 Jako funkcję straty wykorzystaliśmy binarną entropię krzyżową z logitami (BCEWithLogitsLoss z torch.nn) z wagami dla każdej klasy. Wagi zostały obliczone na danych treningowych jako stosunek liczby próbek w których danego instrumentu nie ma do liczby próbek w których instrument jest.
