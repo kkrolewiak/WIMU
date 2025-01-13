@@ -1,9 +1,9 @@
 # Wyniki eksperymentów
 ## Generownaie danych
 Generowanie danych składa się z 3 głównych etapów: wygenerowania pliku MIDI, konwersji MIDI na WAV oraz stwozenia mel-spektrogramów z plików .wav. 
-Za pomocą bibliteki mido tworzone są pliki MIDI składające się z losowo wybranych ścieżek.
+Za pomocą bibliteki mido tworzone są pliki MIDI składające się z losowych dźwięków o wysokości z przedziału 60–72 (od C4 do C5 włącznie), różnej długości.
 Pliki MIDI są syntezowane do WAV przy użyciu biblioteki fluidsynth z samplowaniem 44.1 kHz.
-Z plików WAV tworzone są spektrogramy przy użyciu biblioteki librosa.
+Z plików WAV tworzone są spektrogramy przy użyciu biblioteki librosa z wartościami `window size`: 2048, `hop length`: 512, rodzaj funkcji kształtującej okno: `Hann window`.
 
 W przeprowadzonych przez nas eksperymentach wygenerowaliśmy dźwięki 12 różnych instrumentów. W każdej próbce znajdują się dźwięki od 1 do 4 instrumentów.
 Każdy instrument wstępuje w około 20% próbek. Do eksperymentów zostało wygenerowanych 8000 próbek.
