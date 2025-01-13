@@ -1,0 +1,16 @@
+id,fname,Acoustic Grand Piano,Nylon Acoustic Guitar,String Ensemble 1,Piccolo,Celesta,Acoustic Bass,Trumpet,Square Wave Lead,Hammond Organ,Violin,Soprano Sax,New Age Pad
+0,acustic bass, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0
+1,celesta, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0
+2,grand piano, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+3,hammod organ, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0
+4,leadPad, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+5,new age pad, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+6,organviolinnewagepadtrumpet, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1
+7,nylon guitar, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+8,pianoviolinnewagepadtrumpet, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1
+9,piccolo, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0
+10,soprano sax, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
+11,square lead, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0
+12,string ensamble, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0
+13,trumpet, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0
+14,violin, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0
