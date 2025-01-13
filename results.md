@@ -6,7 +6,7 @@ Pliki MIDI są syntezowane do WAV przy użyciu biblioteki fluidsynth z samplowan
 Z plików WAV tworzone są spektrogramy przy użyciu biblioteki librosa.
 
 W przeprowadzonych przez nas eksperymentach wygenerowaliśmy dźwięki 12 różnych instrumentów. W każdej próbce znajdują się dźwięki od 1 do 4 instrumentów.
-Każdy instrument wstępuje w około 20% próbek.
+Każdy instrument wstępuje w około 20% próbek. Do eksperymentów zostało wygenerowanych 8000 próbek.
 
 Przykładowy wygenerowany plik wav - fortepian
 
@@ -29,6 +29,9 @@ Przykładowy spektrogram - fortepian, skrzypce, trabka i new age pad
 ## Architektura modelu
 
 ## Trening modelu
+
+Jako funkcję straty wykorzystaliśmy binarną entropię krzyżową z logitami (BCEWithLogitsLoss z torch.nn) z wagami dla każdej klasy. Wagi zostały obliczone na danych treningowych jako stosunek liczby próbek w których danego instrumentu nie ma do liczby próbek w których instrument jest.
+Wielkość batcha została eksperymentalnie ustawiona na 64, model osiągał przy niej najlepsze wyniki. Jako optimizer został wybrany Adam z parametrem learning rate 0.001. Model był trenowany przez 20 epok. 
 
 ![training_loss](https://github.com/user-attachments/assets/875a24a0-733b-4039-a309-7fad8184e543)
 
